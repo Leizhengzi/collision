@@ -124,6 +124,16 @@ class LaravelTest extends TestCase
     }
 
     /** @test */
+    public function it_provides_only_the_provider_contract(): void
+    {
+        $app = $this->createApplication();
+
+        $provides = (new CollisionServiceProvider($app))->provides();
+
+        $this->assertEquals([ProviderContract::class], $provides);
+    }
+
+    /** @test */
     public function is_inspector_gets_trace(): void
     {
         $method = new ReflectionMethod(Inspector::class, 'getTrace');
